@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="display-4 mb-4">Search Results</h1>
+
+{% if results %}
+    <div class="row">
+        {% for result in results %}
+            <div class="col-md-10 mx-auto mb-4">
+                <div class="card shadow p-3 rounded">
+                    <div class="card-header bg-light text-dark border">
+                        <strong>Paper/Unit:</strong> {{ result.paper_unit }} |
+                        <strong>Set:</strong> {{ result.set_code }} |
+                        <strong>Qno:</strong> {{ result.question_number }}
+                    </div>                    
+
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>Question:</strong> {{ result.question }}</h5>
+
+                        <p style="white-space: pre-wrap;"><strong>Answer:</strong><br>
+                            {{ result.answer or 'Not provided' }}
+                        </p>
+
+                        {% if result.diagram_path %}
+                            <div class="mb-3">
+                                <strong>Diagram:</strong><br>
+                                <img src="{{ url_for('static', filename=result.diagram_path) }}"
+                                     alt="Diagram"
+                                     class="img-fluid"
+                                     style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 4px;">
+                            </div>
+                        {% else %}
+                            <p><strong>Diagram:</strong> Not provided</p>
+                        {% endif %}
+
+                        {% if result.reference_link %}
+                            <p><strong>Reference:</strong>
+                                <a href="{{ result.reference_link }}" target="_blank">{{ result.reference_link }}</a>
+                            </p>
+                        {% else %}
+                            <p><strong>Reference:</strong> Not provided</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="alert alert-warning">No results found for your search.</p>
+{% endif %}
+{% endblock %}

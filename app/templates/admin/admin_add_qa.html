@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add New Question</h1>
+<form method="POST" action="{{ url_for('admin.add_qa') }}">
+    <label for="paper_unit">Paper/Unit:</label>
+    <input type="text" id="paper_unit" name="paper_unit" required><br><br>
+
+    <label for="set_code">Set:</label>
+    <input type="text" id="set_code" name="set_code" required><br><br>
+
+    <label for="question_number">Qno:</label>
+    <input type="text" id="question_number" name="question_number" required><br><br>
+
+    <label for="question">Question:</label>
+    <textarea id="question" name="question" required></textarea><br><br>
+
+    <label for="answer">Answer:</label>
+    <textarea id="answer" name="answer"></textarea><br><br>
+
+    <label for="diagram_path">Diagram Path (Optional):</label>
+    <input type="text" id="diagram_path" name="diagram_path"><br><br>
+
+    <label for="reference_link">Reference Link (Optional):</label>
+    <input type="text" id="reference_link" name="reference_link"><br><br>
+
+    <button type="submit">Add Question</button>
+</form>
+{% endblock %}

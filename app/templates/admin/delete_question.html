@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-4">
+  <h1 class="display-4 mb-3">Delete Questions</h1>
+  <p class="lead">Select the questions you want to delete from the database.</p>
+
+  <form method="POST">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Paper/Unit</th>
+          <th>Set</th>
+          <th>Qno</th>
+          <th>Question</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for question in questions %}
+        <tr>
+          <td>
+            <input type="checkbox" name="questions_to_delete" value="{{ question.id }}">
+          </td>
+          <td>{{ question.paper_unit }}</td>
+          <td>{{ question.set_code }}</td>
+          <td>{{ question.question_number }}</td>
+          <td>{{ question.question }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="5">No questions available to delete.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-danger">Delete Selected Questions</button>
+  </form>
+</div>
+{% endblock %}

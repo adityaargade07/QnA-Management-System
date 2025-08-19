@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-4">
+  <h1 class="display-4 mb-3">Welcome, Admin!</h1>
+  <p class="lead">Manage the Questions &amp; Answers below with our advanced dashboard features.</p>
+
+  <!-- Admin Navigation Buttons -->
+  <div class="mb-4">
+    <a href="{{ url_for('admin.add_qa') }}" class="btn btn-primary btn-lg mr-2 mb-2">
+      <i class="fas fa-plus"></i> Add New Question
+    </a>
+    <a href="{{ url_for('admin.export_csv') }}" class="btn btn-success btn-lg mr-2 mb-2">
+      <i class="fas fa-file-export"></i> Export CSV
+    </a>
+    <a href="{{ url_for('admin.bulk_upload') }}" class="btn btn-warning btn-lg mr-2 mb-2">
+      <i class="fas fa-upload"></i> Bulk Upload
+    </a>
+    <a href="{{ url_for('admin.search_questions') }}" class="btn btn-info btn-lg mr-2 mb-2">
+      <i class="fas fa-search"></i> Search Questions
+    </a>
+    <a href="{{ url_for('admin.delete_questions') }}" class="btn btn-danger btn-lg mr-2 mb-2">
+      <i class="fas fa-trash-alt"></i> Delete Questions
+    </a>
+  </div>
+
+  <!-- Sample Questions Card with Table -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Current Sample Questions</h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Paper/Unit</th>
+            <th>Set</th>
+            <th>Qno</th>
+            <th>Question</th>
+            <th>Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for question in sample_questions %}
+          <tr>
+            <td>{{ question.paper_unit }}</td>
+            <td>{{ question.set_code }}</td>
+            <td>{{ question.question_number }}</td>
+            <td>{{ question.question }}</td>
+            <td>{{ question.answer }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5">No questions to display.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
