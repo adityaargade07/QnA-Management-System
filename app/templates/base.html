@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="d-flex justify-content-between align-items-center my-4">
+            <h1>Admin Dashboard</h1>
+            <button class="btn btn-toggle" onclick="toggleTheme()">Switch to <span id="theme-label">Dark</span> Mode</button>
+        </header>
+
+        <!-- Page Content -->
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!-- Footer -->
+        <footer class="my-4 text-center">
+            <p>&copy; 2025 Question Management System</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Theme Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const savedTheme = localStorage.getItem("theme") || "light";
+            document.body.classList.add(savedTheme);
+            document.getElementById("theme-label").textContent = savedTheme === "dark" ? "Light" : "Dark";
+        });
+
+        function toggleTheme() {
+            const isDark = document.body.classList.contains("dark");
+            const newTheme = isDark ? "light" : "dark";
+
+            document.body.classList.remove(isDark ? "dark" : "light");
+            document.body.classList.add(newTheme);
+            localStorage.setItem("theme", newTheme);
+
+            document.getElementById("theme-label").textContent = newTheme === "dark" ? "Light" : "Dark";
+        }
+    </script>
+</body>
+</html>
