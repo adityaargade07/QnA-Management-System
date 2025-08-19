@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}User Dashboard - QnA System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #005a9c;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.5em;
+        }
+        nav {
+            background-color: #004080;
+            padding: 10px 30px;
+        }
+        nav a {
+            color: white;
+            margin-right: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            padding: 30px;
+        }
+        footer {
+            background-color: #e0e0e0;
+            color: #555;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    QnA System - User Panel
+</header>
+
+<nav>
+    <a href="{{ url_for('user.user_dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('user.search_qa') }}">Search Q&A</a>
+    <a href="{{ url_for('auth.logout') }}">Logout</a>
+</nav>
+
+<div class="container">
+    {% block content %}
+    <!-- Page content will go here -->
+    {% endblock %}
+</div>
+
+<footer>
+    © 2025 Question Management System
+</footer>
+
+</body>
+</html>

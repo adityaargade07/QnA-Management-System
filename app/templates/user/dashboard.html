@@ -1,0 +1,28 @@
+{% extends 'user/user_base.html' %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block content %}
+    <h2>User Dashboard</h2>
+    <p>Welcome, {{ current_user.username }}!</p>
+
+    <h3>Search Questions</h3>
+    <form method="GET" action="{{ url_for('user.search_qa') }}" style="margin-top: 20px;">
+        <div style="margin-bottom: 10px;">
+            <label for="paper">Paper/Unit:</label><br>
+            <input type="text" name="paper" id="paper" placeholder="e.g. Unit 1" style="width: 300px;">
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label for="set">Set Code:</label><br>
+            <input type="text" name="set" id="set" placeholder="e.g. A or B" style="width: 300px;">
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label for="qno">Question No:</label><br>
+            <input type="text" name="qno" id="qno" placeholder="e.g. 1)a)i)" style="width: 300px;">
+        </div>
+
+        <button type="submit">Search</button>
+    </form>
+{% endblock %}

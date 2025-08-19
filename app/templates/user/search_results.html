@@ -1,0 +1,47 @@
+{% extends 'user/user_base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    {% if query %}
+        <h2 class="mb-4 text-2xl font-semibold">Search Results for "{{ query }}"</h2>
+    {% else %}
+        <h2 class="mb-4 text-2xl font-semibold">Search Results</h2>
+    {% endif %}
+
+    {% if results %}
+        <ul class="list-unstyled">
+        {% for qa in results %}
+            <li class="mb-4 border p-3 rounded shadow-sm bg-light dark:bg-gray-800 dark:text-white">
+                <div class="mb-2">
+                    <strong>Paper/Unit:</strong> {{ qa.paper_unit }} |
+                    <strong>Set:</strong> {{ qa.set_code }} |
+                    <strong>Qno:</strong> {{ qa.question_number }}
+                </div>
+
+                <div class="mb-2"><b>Q:</b> {{ qa.question }}</div>
+                <div class="mb-2"><b>A:</b> {{ qa.answer }}</div>
+
+                {% if qa.diagram_path %}
+                    <div class="mb-2">
+                        <b>Diagram:</b><br>
+                        <img src="{{ url_for('static', filename=qa.diagram_path) }}" alt="Diagram" height="100" class="img-thumbnail">
+                    </div>
+                {% endif %}
+
+                {% if qa.reference_link %}
+                    <div><b>Reference:</b> <a href="{{ qa.reference_link }}" target="_blank">{{ qa.reference_link }}</a></div>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        {% if not query %}
+            <div class="alert alert-info">Please enter a search query.</div>
+        {% else %}
+            <div class="alert alert-warning">No results found for "{{ query }}".</div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
